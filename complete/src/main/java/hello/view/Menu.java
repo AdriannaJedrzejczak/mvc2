@@ -25,8 +25,9 @@ public class Menu {
         System.out.println("***************************************************");
 
         System.out.println("Choose what to do:");
-        System.out.println("1. Display phone book");
+        System.out.println("1. Display whole phone book");
         System.out.println("2. Add new phone contact");
+        System.out.println("3. Search for phone contact");
         phoneContactService.loadAllContacts();
 
 
@@ -56,6 +57,14 @@ public class Menu {
                 phoneContactService.addNewContact(name, surname, number);
                 System.out.println( name + " " + surname + " added!");
                 System.out.println();
+
+                break;
+            }
+            case 3: {
+                String chain;
+                System.out.println("Enter search phrase: ");
+                chain = reader.nextLine();
+                phoneContactService.searchForContact(chain);
 
                 break;
             }

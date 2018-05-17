@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,6 +40,24 @@ public class PhoneContactServiceImpl implements PhoneContactService{
         this.myContacts.add(newContact);
         fileDao.SaveToFile(myContacts, file);
     }
+
+    @Override
+    public void searchForContact(String chainToLookFor) {
+        List<PhoneContact> results = new ArrayList<>();
+        String actualChain;
+        for(int i = 0; i< myContacts.size(); i++ ) {
+            PhoneContact actualContact = myContacts.get(i);
+            actualChain = actualContact.getName() + actualContact.getSurname() + actualContact.getPhoneNumber();
+            if(actualChain.contains(chainToLookFor)) {
+                results.add(actualContact);
+            }
+        }
+        display(results);
+
+    }
+
+
+
 
     private void display(List<PhoneContact> phoneList) {
         for( int i = 0; i < phoneList.size(); i++) {
